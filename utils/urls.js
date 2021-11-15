@@ -10,6 +10,8 @@ export default {
     app: {
       home: "/app",
     },
+    adopt: "/adopt",
+    admin: "/admin",
   },
   api: {
     example: "/api/example",

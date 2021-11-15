@@ -8,8 +8,8 @@ const routes = [
     atEnd: false,
   },
   {
-    name: "SSR",
-    link: urls.pages.ssr,
+    name: "Adopt",
+    link: urls.pages.adopt,
     auth: false,
     atEnd: false,
   },
@@ -23,6 +23,11 @@ const routes = [
     name: "App Home",
     link: urls.pages.app.home,
     auth: true,
+  },
+  {
+    name: "Admin",
+    link: urls.pages.admin,
+    auth: false,
   },
 ];
 
