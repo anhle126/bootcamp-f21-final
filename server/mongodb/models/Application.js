@@ -26,6 +26,10 @@ const ApplicationSchema = new Schema({
     type: String,
     required: true,
   },
+  isApproved: {
+    type: Boolean,
+    required: true, // make it default false
+  },
   catID: {
     type: ObjectID,
     required: true,
