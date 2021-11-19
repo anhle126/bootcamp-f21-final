@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const ApplicationSchema = new Schema({
+  
   name: {
     type: String,
     required: true,
@@ -16,11 +17,14 @@ const ApplicationSchema = new Schema({
   },
   email: {
     type: String,
+    trim: true,
     required: true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'], // not sure if this works
   },
   phone: {
     type: String,
     required: true,
+    match: [/^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/, 'Please fill a valid phone number'], // not sure if this works
   },
   explanation: {
     type: String,
@@ -28,7 +32,7 @@ const ApplicationSchema = new Schema({
   },
   isApproved: {
     type: Boolean,
-    required: true, // make it default false
+    default: false,
   },
   catID: {
     type: ObjectID,

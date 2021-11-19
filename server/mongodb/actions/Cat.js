@@ -1,4 +1,7 @@
-// getAllCats() function - gets all cats in the "cats" DB
+import mongoDB from "../index";
+import Cat from "../models/Cat";
+
+// getAllCats() function - gets all cats in the "cats" DB - unsure if used
 
 // getAdoptableCats() function - gets all cats in the "cats" DB that have isAdopted = false
 

@@ -1,3 +1,6 @@
+import mongoDB from "../index";
+import Application from "../models/Application";
+
 // submitApplication(Application object) - create new document in "applications" DB
     // checks if invalid
 
