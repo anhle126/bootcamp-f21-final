@@ -8,20 +8,24 @@ import mongodb from "../index"
 import Application from "../models/Adoption"
 import Cat from "../models/Cat"
 
+const ObjectId = require('mongodb').ObjectId
+
 export async function getApplicationInfo(id) {
     if ((!id) || (id == null)) {
         throw new Error("Application ID is null.")
     }
+    console.log(typeof(id))
 
     await mongodb()
-    const application = await Application.find({_id: id})
+    const parsedID = new ObjectId(id)
+    const application = await Application.find({_id: parsedID})
 
     // How to check if the query returned is empty https://stackoverflow.com/questions/45172700/what-does-mongoose-return-when-a-find-query-is-empty
 
-    if (application.length === 1) {
+    if (application !== null) {
         // Found exactly one application
         return {
-            _id: id,
+            _id: parsedID,
             name: application.name,
             location: application.location,
             email: application.email,
