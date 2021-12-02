@@ -5,7 +5,7 @@
 // endpoints and requests.
 
 import mongodb from "../../../../server/mongodb";
-import { submitApplication } from "../../../../server/mongodb/actions/adoption";
+import { submitApplication } from "../../../../server/mongodb/actions/Application";
 
 
 export default async function handler (req, res) {
@@ -17,16 +17,18 @@ export default async function handler (req, res) {
         })
     } else {
         submitApplication(req.body)
-        .then((result) => {
+        .then((application) => {
+            console.log("Returning appliation from submitApplication")
             return res.status(200).json({
                 success: true,
-                payload: result
+                payload: application
             })
         }).catch((err) => {
             return res.status(400).json({
                 success: false,
-                payload: err.message
+                message: err.message
             })
         })
-    }
+        
+    }      
 }

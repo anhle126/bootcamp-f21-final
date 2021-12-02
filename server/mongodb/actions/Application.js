@@ -5,70 +5,51 @@
 // Mongoose important documentation https://devdocs.io/mongoose/
 // Mongoose original documentation from the website (but I think the one above works better) https://mongoosejs.com/docs/guide.html
 import mongodb from "../index"
-import Application from "../models/Adoption"
 import Cat from "../models/Cat"
+import Application from "../models/Application"
 
 const ObjectId = require('mongodb').ObjectId
 
-export async function getApplicationInfo(id) {
+export const getApplicationInfo = async (id) => {
     if ((!id) || (id == null)) {
         throw new Error("Application ID is null.")
     }
-    console.log(typeof(id))
 
     await mongodb()
     const parsedID = new ObjectId(id)
-    const application = await Application.find({_id: parsedID})
+
+    const application = await Application.find({_id: parsedID}).exec()
+    console.log(application)
 
     // How to check if the query returned is empty https://stackoverflow.com/questions/45172700/what-does-mongoose-return-when-a-find-query-is-empty
-
+    // Mongoose would always return empty array?? 
     if (application !== null) {
-        // Found exactly one application
-        return {
-            _id: parsedID,
-            name: application.name,
-            location: application.location,
-            email: application.email,
-            phone: application.phone,
-            explanation: application.explanation,
-            isApproved: application.isApproved,
-            catID: application.catID
-        }
+        return application
     } else {
-        // Something went wrong. Either found > 1 applications with the id passed in, or 
-        // no application was found
         throw new Error("Error when finding the application you requested.")
     }
 }
 
 // https://codedec.com/tutorials/how-to-setup-up-schema-for-mongodb-using-mongoose/#:~:text=Use%20the%20Mongoose.Schema%20%28%29%20function%20to%20specify%20the,created%20automatically%20and%20is%20unique%20for%20each%20object.
-export async function submitApplication(application) {
+export const submitApplication = async (application) => {
     await mongodb()
 
-    Adoption.create({
-        name: application.name,
-        location: application.location,
-        email: application.email,
-        phone: application.phone,
-        explanation: application.exaplanation,
-        isApproved: false,
-        catID: application.catID
-    }).then ((err, newApplication) => {
+    const newApplication = await new Application(application)
+    await newApplication.save(function(err) {
         if (err) {
-            throw new Error(err);
-        } else {
-            return "Successfully saved your application."
-        }
+            throw new Error(err)
+        } 
     })
+    return newApplication
 }
 
-export async function getAllApplications(catID) {
+export const getAllApplications = async (catID) => {
     if (catID == null) {
         throw new Error("Cat ID is null. Can't proceed.")
     }
 
     await mongodb()
-    const allApplications = await Adoption.find( {catID: catID} )
+    const allApplications = await Application.find( {catID: catID} )
 
     if (allApplications.length === 0) {
         throw new Error("Can't find any applications for this cat :( .")
@@ -79,7 +60,7 @@ export async function getAllApplications(catID) {
 
 
 // How to update document in mongoose https://masteringjs.io/tutorials/mongoose/update
-export async function setApproved(applicationID) {
+export const setApproved = async (applicationID) => {
     if (applicationID == null) {
         throw new Error("Can't find the application with a null ID.")
     }
@@ -104,8 +85,6 @@ export async function setApproved(applicationID) {
             throw new Error("This cat already has an approved application. Can't approve 2 applications.")
         }
     } else {
-        // Something went wrong. Either found > 1 applications with the id passed in, or 
-        // no application was found
         throw new Error("Error when finding the appliation you requested.")
     }
 }

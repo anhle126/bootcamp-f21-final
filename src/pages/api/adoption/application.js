@@ -29,7 +29,7 @@ export default async function handler (req, res) {
                     "Can't access all applications in database."
                 })
             } else {
-                getAllApplications(catID)
+                await getAllApplications(catID)
                 .then((result) => {
                     return res.status(200).json({
                         success: true,
@@ -43,7 +43,7 @@ export default async function handler (req, res) {
                 })
             }
         } else {
-            getApplicationInfo(applicationID)
+            await getApplicationInfo(applicationID)
             .then((result) => {
                 return res.status(200).json({
                     success: true,
@@ -64,7 +64,7 @@ export default async function handler (req, res) {
                 message: "Can't update an application without application ID."
             })
         } else {
-            setApproved(applicationID)
+            await setApproved(applicationID)
             .then((result) => {
                 return res.status(200).json({
                     success: true,
