@@ -19,8 +19,6 @@ export default {
       logout: "/api/user/logout",
       getCurrent: "/api/user/get-current",
     },
-    cat: {
-      shelter: "/api/shelter",
-    }
+    shelter: "/api/shelter"
   },
 };

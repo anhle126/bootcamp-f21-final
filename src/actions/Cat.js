@@ -1,8 +1,7 @@
-import fetch from "ismorphic-unfetch";
 import urls from "../../utils/urls";
 
 export const getAllCats = () => {
-    return fetch(url.baseUrl + urls.api.shelter, {
+    return fetch(urls.baseUrl + urls.api.shelter, {
         method: "GET",
         mode: "same-origin",
     })
@@ -19,7 +18,7 @@ export const getAllCats = () => {
 }
 
 export const getAdoptableCats = () => {
-    return fetch(url.baseUrl + urls.api.shelter + "?isAdopted=true", {
+    return fetch(urls.baseUrl + urls.api.shelter + "?isAdopted=true", {
         method: "GET",
         mode: "same-origin",
     })
@@ -36,7 +35,7 @@ export const getAdoptableCats = () => {
 }
 
 export const getCatInfo = (catID) => {
-    return fetch(url.baseUrl + urls.api.shelter + "?catID=" + catID, {
+    return fetch(urls.baseUrl + urls.api.shelter + "?catID=" + catID, {
         method: "GET",
         mode: "same-origin",
     })
