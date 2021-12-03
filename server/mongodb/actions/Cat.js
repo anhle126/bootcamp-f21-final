@@ -9,25 +9,20 @@ import Cat from "../models/Cat";
 
 export async function getAllCats() {
     await mongodb();
-    try {
-        const cats = Cat.find();
-        return {
-            cats
-        }
-    } catch (e) {
+    const cats = Cat.find();
+    if (cats !== null) {
+        return cats
+    } else {
         throw new Error("Cats could not be found")
     }
 }
 
 export async function getAdoptableCats() {
     await mongodb();
-
-    try {
-        const adoptableCats = Cat.find({ isAdoptable: {$eq: true}})
-        return {
-            adoptableCats
-        }
-    } catch (e) {
+    const adoptableCats = Cat.find({isAdopted: {$eq: true}})
+    if (adoptableCats !== null) {
+        return adoptableCats
+    } else {
         throw new Error("Adoptable cats could not be found")
     }
 }
@@ -37,10 +32,8 @@ export const getCatInfo = async (catID) => {
         throw new Error("no ID inputted")
     }
     await mongodb();
-    const parsedID = new ObjectID(id)
 
-    const cat = await Cat.find({_id: parsedID}).exec()
-    console.log(cat)
+    const cat = await Cat.find({_id: catID})
 
     if (cat !== null) {
         return cat
