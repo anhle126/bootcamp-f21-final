@@ -3,8 +3,6 @@ import { getAllCats } from "../../../server/mongodb/actions/Cat";
 import { getAdoptableCats } from "../../../server/mongodb/actions/Cat";
 import { getCatInfo } from "../../../server/mongodb/actions/Cat";
 
-// what should the file name be? should there just be a file called shelter.js?
-
 export default async function handler (req, res) {
     await mongodb()
 
@@ -13,7 +11,7 @@ export default async function handler (req, res) {
         const isAdopted = req.query.isAdopted
 
         if (catID) {
-            await getCatInfo(catID)
+            getCatInfo(catID)
             .then((result) => {
                 return res.status(200).json({
                     success: true,
@@ -27,7 +25,7 @@ export default async function handler (req, res) {
             })
         } else {
             if (isAdopted) {
-                await getAdoptableCats()
+                getAdoptableCats()
                 .then((result) => {
                     return res.status(200).json({
                         success: true,
@@ -40,7 +38,7 @@ export default async function handler (req, res) {
                     })
                 })
             } else {
-                await getAllCats()
+                getAllCats()
                 .then((result) => {
                     return res.status(200).json({
                         success: true,
