@@ -4,12 +4,9 @@
 // Here, we will call appropriate functions from file 2 when handling the parameter of the api
 // endpoints and requests.
 
-import mongodb from "../../../../server/mongodb";
 import { submitApplication } from "../../../../server/mongodb/actions/Application";
 
-
 export default async function handler (req, res) {
-    await mongodb()
     if (req.method !== 'POST') {
         return res.status(400).json({
             success: false,
@@ -18,7 +15,8 @@ export default async function handler (req, res) {
     } else {
         submitApplication(req.body)
         .then((application) => {
-            console.log("Returning appliation from submitApplication")
+            console.log("Returning application from submitApplication")
+            console.log(application)
             return res.status(200).json({
                 success: true,
                 payload: application

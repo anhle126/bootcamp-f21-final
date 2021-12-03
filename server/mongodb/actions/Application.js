@@ -1,14 +1,3 @@
-// submitApplication(Application object) - create new document in "applications" DB
-    // checks if invalid
-
-// getAllApplications(ObjectID catID) - gets all applications associated with that catID
-
-// getApplicationInfo(ObjectID applicationID) - gets all fields of an "applications" document based on ObjectID
-
-// setApproved(ObjectID applicationID) - if all other applications' isApproved is false, change isApproved for that particular application to true
-    // change cat's isAdopted to true
-
-
 // Call this file 3
 // Located in server/mongodb/actions
 // This is where the connection to the database actually happens
@@ -30,10 +19,8 @@ export const getApplicationInfo = async (id) => {
     const parsedID = new ObjectId(id)
 
     const application = await Application.find({_id: parsedID}).exec()
-    console.log(application)
-
+    
     // How to check if the query returned is empty https://stackoverflow.com/questions/45172700/what-does-mongoose-return-when-a-find-query-is-empty
-    // Mongoose would always return empty array?? 
     if (application !== null) {
         return application
     } else {
@@ -64,11 +51,10 @@ export const getAllApplications = async (catID) => {
 
     if (allApplications.length === 0) {
         throw new Error("Can't find any applications for this cat :( .")
-    } else {
-        return allApplications
     }
+    
+    return allApplications
 }
-
 
 // How to update document in mongoose https://masteringjs.io/tutorials/mongoose/update
 export const setApproved = async (applicationID) => {
@@ -76,10 +62,54 @@ export const setApproved = async (applicationID) => {
         throw new Error("Can't find the application with a null ID.")
     }
 
+    console.log("Inside setApproved")
     await mongodb()
-    const application = await Application.find( {_id: id} )
 
-    if (application.length === 1) {
+    const parsedID = new ObjectId(applicationID)
+    await Application.find( {_id: parsedID} ).exec()
+    .then(async (appToSetArray) => {
+        if (!appToSetArray) {
+            throw new Error("Can't find the application with this ID.")
+        } else {
+            if (appToSetArray.length === 1) {
+                const catID = appToSetArray[0].catID
+                const parsedCatID = new ObjectId(catID)
+
+                const appToSet = appToSetArray[0]
+                await Cat.find( {_id: parsedCatID} ).exec()
+                .then(async (catToAdoptArray) => {
+                    if (!catToAdoptArray) {
+                        throw new Error("Can't find the cat you want to adopt.")
+                    } else {
+                        if (catToAdoptArray.length === 1) {
+                            // Set the cat to adopted (check to see if it has already been adopted)
+                            // Set application to approved
+
+                            const catToAdopt = catToAdoptArray[0]
+
+                            if (catToAdopt.isAdopted === false) {
+                                catToAdopt.isAdopted = true
+                                await catToAdopt.save()
+
+                                appToSet.isApproved = true
+                                await appToSet.save()
+
+                                return "Application approved sucessfully."
+                            } else {
+                                throw new Error("This cat has already been adopted.")
+                            }
+                        } else {
+                            throw new Error("There was en error when looking for this cat.")
+                        }
+                    }
+                })
+            } else {
+                throw new Error("There was an error when looking for your application.")
+            }
+        }
+    })
+
+    /*if (application.length === 1) {
         // Found exactly one application
         const approvedApplication = await Application.findOne( {isApproved: true} ) 
 
@@ -97,5 +127,5 @@ export const setApproved = async (applicationID) => {
         }
     } else {
         throw new Error("Error when finding the appliation you requested.")
-    }
+    }*/
 }
