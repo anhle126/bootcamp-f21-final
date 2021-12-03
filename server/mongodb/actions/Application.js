@@ -19,7 +19,7 @@ export const getApplicationInfo = async (id) => {
     const parsedID = new ObjectId(id)
 
     const application = await Application.find({_id: parsedID}).exec()
-
+    
     // How to check if the query returned is empty https://stackoverflow.com/questions/45172700/what-does-mongoose-return-when-a-find-query-is-empty
     if (application !== null) {
         return application
@@ -40,7 +40,6 @@ export const submitApplication = async (application) => {
     })
     return newApplication
 }
-
 
 export const getAllApplications = async (catID) => {
     if (catID == null) {
@@ -129,5 +128,4 @@ export const setApproved = async (applicationID) => {
     } else {
         throw new Error("Error when finding the appliation you requested.")
     }*/
-
 }
