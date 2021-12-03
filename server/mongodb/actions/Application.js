@@ -7,6 +7,7 @@
 import mongodb from "../index"
 import Cat from "../models/Cat"
 import Application from "../models/Application"
+import { create } from "lodash"
 
 const ObjectId = require('mongodb').ObjectId
 
@@ -41,6 +42,16 @@ export const submitApplication = async (application) => {
         } 
     })
     return newApplication
+
+    /*await createApplication(application)
+    console.log("Got here.")
+    return application*/
+}
+
+const createApplication = async (application) => {
+    console.log("Got inside")
+    await Application.create(application)
+    console.log("Got to the end")
 }
 
 export const getAllApplications = async (catID) => {

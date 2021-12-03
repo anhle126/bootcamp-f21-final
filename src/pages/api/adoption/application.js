@@ -4,7 +4,6 @@
 // Here, we will call appropriate functions from file 2 when handling the parameter of the api
 // endpoints and requests.
 
-import mongodb from "../../../../server/mongodb";
 import { getAllApplications } from "../../../../server/mongodb/actions/Application";
 import { getApplicationInfo } from "../../../../server/mongodb/actions/Application";
 import { setApproved } from "../../../../server/mongodb/actions/Application";
@@ -14,7 +13,6 @@ import { setApproved } from "../../../../server/mongodb/actions/Application";
 // https://stackoverflow.com/questions/66739797/how-to-handle-a-post-request-in-next-js
 
 export default async function handler (req, res) {
-    await mongodb()
 
     if (req.method === 'GET') {
         // Either getAllApplications or getApplicationInfo
