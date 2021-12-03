@@ -48,5 +48,4 @@ ApplicationSchema.post('save', function() {
   console.log("Done saving")
 })
 
-
 export default mongoose.models.Application ?? mongoose.model("Application", ApplicationSchema);

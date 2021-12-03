@@ -23,5 +23,6 @@ export default {
       shelter: "/api/shelter",
       adoption: "/api/adoption"
     },
+    shelter: "/api/shelter"
   },
 };
