@@ -7,3 +7,6 @@
 import fetch from "isomorphic-unfetch"
 import urls from "../../utils/urls"
 
+export const submitApplication = (application) => {
+    
+}
