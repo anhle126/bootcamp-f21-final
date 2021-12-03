@@ -20,7 +20,7 @@ export default {
       getCurrent: "/api/user/get-current",
     },
     cat: {
-      shelter: "/api/cat/shelter",
+      shelter: "/api/shelter",
     }
   },
 };

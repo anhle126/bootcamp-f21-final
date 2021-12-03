@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const ApplicationSchema = new Schema({
-  
+const ApplicationSchema = new Schema({ 
   name: {
     type: String,
     required: true,
