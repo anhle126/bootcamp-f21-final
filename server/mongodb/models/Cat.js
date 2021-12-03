@@ -1,3 +1,6 @@
+// backend Cat file 4 - located in server/mongodb/models
+// schema! the format the documents in the collection have to follow
+
 import mongoose from "mongoose";
 
 const { Schema } = mongoose
@@ -7,7 +10,6 @@ const CatSchema = new Schema ({
         type: String,
         required: true
     },
-
     image: {
         type: String,
         required: true,
