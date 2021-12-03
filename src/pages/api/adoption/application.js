@@ -14,10 +14,10 @@ import { setApproved } from "../../../../server/mongodb/actions/Application";
 
 export default async function handler (req, res) {
 
+    const applicationID = req.query.applicationID
+    const catID = req.query.catID
     if (req.method === 'GET') {
         // Either getAllApplications or getApplicationInfo
-        const applicationID = req.query.applicationID
-        const catID = req.query.catID
 
         if (!applicationID) {
             if (!catID) {
@@ -27,7 +27,7 @@ export default async function handler (req, res) {
                     "Can't access all applications in database."
                 })
             } else {
-                await getAllApplications(catID)
+                getAllApplications(catID)
                 .then((result) => {
                     return res.status(200).json({
                         success: true,
@@ -41,7 +41,7 @@ export default async function handler (req, res) {
                 })
             }
         } else {
-            await getApplicationInfo(applicationID)
+            getApplicationInfo(applicationID)
             .then((result) => {
                 return res.status(200).json({
                     success: true,
@@ -56,19 +56,26 @@ export default async function handler (req, res) {
         }
     } else if (req.method === 'PUT') {
         // Update the application to approved
+        console.log("HERE AT THE BEGINNING")
+        console.log(applicationID)
+        console.log("ApplicationID just printed")
         if (!applicationID) {
+            console.log("ApplicationID is null or something.")
             return res.status(400).json({
                 success: false,
                 message: "Can't update an application without application ID."
             })
         } else {
+            console.log("About to set approved")
             await setApproved(applicationID)
             .then((result) => {
+                console.log("Out of setapproved")
                 return res.status(200).json({
                     success: true,
                     payload: result
                 })
             }).catch((err) => {
+                console.log("Got an error")
                 return res.status(400).json({
                     success: false,
                     message: err.message

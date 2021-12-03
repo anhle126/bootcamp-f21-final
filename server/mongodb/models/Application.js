@@ -38,6 +38,8 @@ const ApplicationSchema = new Schema({
     required: true,
   },
 });
+
+// Debug message
 ApplicationSchema.pre('save', function() {
   console.log("About to save.")
 });
@@ -45,4 +47,6 @@ ApplicationSchema.pre('save', function() {
 ApplicationSchema.post('save', function() {
   console.log("Done saving")
 })
+
+
 export default mongoose.models.Application ?? mongoose.model("Application", ApplicationSchema);
