@@ -18,11 +18,11 @@ export default {
       login: "/api/user/login",
       logout: "/api/user/logout",
       getCurrent: "/api/user/get-current",
+
+      // Where I add in our API designs
+      shelter: "/api/shelter",
+      adoption: "/api/adoption"
     },
-    shelter: "/api/shelter",
-    adoption: {
-        newApplication: "/api/adoption/newApplication",
-        applicationQuery: "/api/adoption/application"
-    }
+    shelter: "/api/shelter"
   },
 };
