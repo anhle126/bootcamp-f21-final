@@ -1,8 +1,6 @@
-// Call this file 2
-// Located in src/actions
-// Front end will call from here
-// This file will wrap around a file in server/mongodb/actions (file 3)
-// This file SENDS the appropriate request (GET or POST or DELETE or UPDATE) to file 3
+// Front end will call the functions in here to fetch data / post data.
+// Wrap around the fetching operations for front end to use
+// This file sends the appropriate request (GET or POST or DELETE or UPDATE) to APIs endpoints
 
 import fetch from "isomorphic-unfetch"
 import urls from "../../utils/urls"

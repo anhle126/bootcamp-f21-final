@@ -1,5 +1,3 @@
-// Call this file 3
-// Located in server/mongodb/actions
 // This is where the connection to the database actually happens
 
 // Mongoose important documentation https://devdocs.io/mongoose/
@@ -109,23 +107,5 @@ export const setApproved = async (applicationID) => {
         }
     })
 
-    /*if (application.length === 1) {
-        // Found exactly one application
-        const approvedApplication = await Application.findOne( {isApproved: true} ) 
-
-        if (approvedApplication.length === 0) {
-            // Approve this application
-            application.isApproved = true
-            await application.save()
-            
-            // Set cat to alread adopted
-            const catAdopted = await Cat.find( {_id: approvedApplication.catID} )
-            catAdopted.isAdopted = true
-            await catAdopted.save()
-        } else {
-            throw new Error("This cat already has an approved application. Can't approve 2 applications.")
-        }
-    } else {
-        throw new Error("Error when finding the appliation you requested.")
-    }*/
+    return "Successfully approved this application."
 }
