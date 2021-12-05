@@ -106,6 +106,5 @@ export const setApproved = async (applicationID) => {
             }
         }
     })
-
     return "Successfully approved this application."
 }

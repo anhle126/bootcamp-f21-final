@@ -1,6 +1,10 @@
+// backend Cat file 3 - located in server/mongodb/actions
+// connects to database via schema is server/mongodb/models
+
 import mongodb from "../index";
 import Cat from "../models/Cat";
 
+// to get all cats, used find()
 export async function getAllCats() {
     await mongodb();
     const cats = Cat.find();
@@ -11,6 +15,7 @@ export async function getAllCats() {
     }
 }
 
+// to get all adoptable cats, used find({isAdopted: {$eq: true}})
 export async function getAdoptableCats() {
     await mongodb();
     const adoptableCats = Cat.find({isAdopted: {$eq: true}})
@@ -21,6 +26,7 @@ export async function getAdoptableCats() {
     }
 }
 
+// to get cat info of one cat, used find({_id: catID})
 export const getCatInfo = async (catID) => {
     if ((!catID) || catID == null) {
         throw new Error("no ID inputted")
