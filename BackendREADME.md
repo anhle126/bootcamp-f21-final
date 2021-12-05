@@ -1,3 +1,5 @@
+**API ENDPOINTS**
+
 /api/shelter?isAdopted={true, false, undefined}: 
 
     GET request. Returns all the cats currently in the shelter that satisfies the isAdopted query parameter.
