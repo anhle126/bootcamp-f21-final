@@ -19,5 +19,10 @@ export default {
       logout: "/api/user/logout",
       getCurrent: "/api/user/get-current",
     },
+    shelter: "/api/shelter",
+    adoption: {
+        newApplication: "/api/adoption/newApplication",
+        applicationQuery: "/api/adoption/application"
+    }
   },
 };
