@@ -26,7 +26,7 @@ export const submitApplication = (application) => {
     })
 };
 
-export const getAllApplications = (catID) => {
+export const getAllApplications = (catName) => {
     fetch(urls.dbUrl + urls.adoption.applicationQuery + `?catID=${catID}`, {
         method: "GET",
         mode: "same-origin",

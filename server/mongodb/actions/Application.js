@@ -39,12 +39,14 @@ export const submitApplication = async (application) => {
     return newApplication
 }
 
-export const getAllApplications = async (catID) => {
-    if (catID == null) {
-        throw new Error("Cat ID is null. Can't proceed.")
+export const getAllApplications = async (catName) => {
+    if (catName == null) {
+        throw new Error("Cat name is null. Can't proceed.")
     }
 
     await mongodb()
+    const cat = await Cat.find( {name: catName} ).exec()
+    const catID = cat[0]._id
     const allApplications = await Application.find( {catID: catID} )
 
     if (allApplications.length === 0) {

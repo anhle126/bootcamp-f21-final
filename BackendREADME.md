@@ -12,7 +12,7 @@
 	This is where we take in information from the adoption form and store it in our application database
     Adoption form in application database when sent should be sent along with the catID
 	
-/api/adoption/application?applicationID={}&catID={}&setApproved={true, false, undefined}
+/api/adoption/application?applicationID={}&catName={}
 
     Handle PUT requests
 	
@@ -22,6 +22,6 @@
 	
         Returns all applications for adoptions
 		
-        If catID is included, return all applications for that specific cat
+        If catName is included, return all applications for that specific cat
 		
         If applicationID is included, return all information of that specific application

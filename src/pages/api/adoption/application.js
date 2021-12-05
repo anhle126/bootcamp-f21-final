@@ -13,19 +13,19 @@ import { setApproved } from "../../../../server/mongodb/actions/Application";
 export default async function handler (req, res) {
 
     const applicationID = req.query.applicationID
-    const catID = req.query.catID
+    const catName = req.query.catName
     if (req.method === 'GET') {
         // Either getAllApplications or getApplicationInfo
 
         if (!applicationID) {
-            if (!catID) {
+            if (!catName) {
                 return res.status(400).json({
                     success: false,
-                    message: "Need either an application ID or a cat ID. " +
+                    message: "Need either an application ID or a cat name. " +
                     "Can't access all applications in database."
                 })
             } else {
-                getAllApplications(catID)
+                getAllApplications(catName)
                 .then((result) => {
                     return res.status(200).json({
                         success: true,
