@@ -1,5 +1,3 @@
-// Call this file 3
-// Located in server/mongodb/actions
 // This is where the connection to the database actually happens
 
 // Mongoose important documentation https://devdocs.io/mongoose/
@@ -108,4 +106,5 @@ export const setApproved = async (applicationID) => {
             }
         }
     })
+    return "Successfully approved this application."
 }
