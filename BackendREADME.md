@@ -9,6 +9,7 @@
     returns the information of the specific cat. GET request.
 
 /api/adoption/newApplication
+
     Handle POST requests. 
 	
 	This is where we take in information from the adoption form and store it in our application database
